@@ -1,0 +1,40 @@
+﻿@page
+@model TraineeFrontend.Pages.CreateModel
+@{
+    ViewData["Title"] = "Create Trainee";
+}
+
+<h2>Create New Trainee</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Trainee.Name"></label>
+        <input asp-for="Trainee.Name" class="form-control" />
+        <span asp-validation-for="Trainee.Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Trainee.Email"></label>
+        <input asp-for="Trainee.Email" class="form-control" />
+        <span asp-validation-for="Trainee.Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Trainee.Address"></label>
+        <input asp-for="Trainee.Address" class="form-control" />
+        <span asp-validation-for="Trainee.Address" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Trainee.Phone"></label>
+        <input asp-for="Trainee.Phone" class="form-control" />
+        <span asp-validation-for="Trainee.Phone" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-page="TraineeList" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

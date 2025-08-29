@@ -1,0 +1,41 @@
+﻿@page
+@model TraineeFrontend.Pages.TraineeListModel
+@{
+    ViewData["Title"] = "List All Trainees";
+}
+
+<table class="table mt-5">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Address</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var trainee in Model.TraineeList)
+        {
+            <tr>
+                <td>@trainee.Name</td>
+                <td>@trainee.Email</td>
+                <td>@trainee.Address</td>
+                <td>@trainee.Phone</td>
+                <>
+                <td>
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@trainee.Id">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+                    <a asp-page="Edit" asp-route-id="@trainee.Id" class="btn btn-warning">Edit</a>
+
+
+                </td>
+               
+            </tr>
+        }
+    </tbody>
+</table>
+ 
+<a asp-page="Create" class="btn btn-success mt-3">Add New Trainee</a>
+
