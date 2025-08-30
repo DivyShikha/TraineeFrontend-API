@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TraineeFrontend.Model;
+using TraineeFrontend.Service;
 
 namespace TraineeFrontend.Pages
 {
@@ -12,7 +13,7 @@ namespace TraineeFrontend.Pages
         {
             _service = service;
         }
-        public List<Trainee> TraineeList { get; set; } = new();
+        public List<Model.Trainee> TraineeList { get; set; } = new();
         public async Task OnGetAsync()
         {
             TraineeList = await _service.GetTrainees();

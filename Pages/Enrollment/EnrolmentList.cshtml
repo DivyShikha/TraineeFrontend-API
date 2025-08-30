@@ -1,0 +1,38 @@
+﻿@page
+@model TraineeFrontend.Pages.Enrolment.EnrolmentListModel
+@{
+    ViewData["Title"] = "Enrolments";
+}
+
+<h2>Enrolments</h2>
+
+<a asp-page="Create" class="btn btn-success mb-3">Add New Enrolment</a>
+
+@if (!Model.Enrolments.Any())
+{
+    <div class="alert alert-info">No enrolments found.</div>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Enrollment ID</th>
+                <th>Description</th>
+                <th>Course</th>
+                <th>Trainee</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var e in Model.Enrolments)
+            {
+                <tr>
+                    <td>@e.EnrollmentID</td>
+                    <td>@e.Description</td>
+                    <td>@(Model.CourseNames.ContainsKey(e.CourseID) ? Model.CourseNames[e.CourseID] : "Unknown")</td>
+                    <td>@(Model.TraineeNames.ContainsKey(e.TraineeID) ? Model.TraineeNames[e.TraineeID] : "Unknown")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,12 +1,15 @@
-﻿@page
-@model TraineeFrontend.Pages.CreateModel
+﻿@page "{id:int}"
+@model TraineeFrontend.Pages.Trainee.EditModel
 @{
-    ViewData["Title"] = "Create Trainee";
+    ViewData["Title"] = "Edit Trainee";
 }
 
-<h2>Create New Trainee</h2>
+<h2>Edit Trainee</h2>
 
 <form method="post">
+    <!-- Hidden ID field so it's sent back in POST -->
+    <input type="hidden" asp-for="Trainee.Id" />
+
     <div class="form-group">
         <label asp-for="Trainee.Name"></label>
         <input asp-for="Trainee.Name" class="form-control" />
@@ -31,7 +34,7 @@
         <span asp-validation-for="Trainee.Phone" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="submit" class="btn btn-primary">Save Changes</button>
     <a asp-page="TraineeList" class="btn btn-secondary">Cancel</a>
 </form>
 

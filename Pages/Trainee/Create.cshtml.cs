@@ -1,8 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TraineeFrontend.Model;
+using TraineeFrontend.Service;
 
-namespace TraineeFrontend.Pages
+namespace TraineeFrontend.Pages.Trainee
 {
     public class CreateModel : PageModel
     {
@@ -14,7 +15,7 @@ namespace TraineeFrontend.Pages
         }
 
         [BindProperty]
-        public Trainee Trainee { get; set; }
+        public Model.Trainee Trainee { get; set; }
 
         public void OnGet()
         {

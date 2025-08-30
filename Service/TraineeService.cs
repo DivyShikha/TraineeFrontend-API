@@ -3,7 +3,7 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using TraineeFrontend.Model;
 
-namespace TraineeFrontend.Model
+namespace TraineeFrontend.Service
 {
     public class TraineeService
     {

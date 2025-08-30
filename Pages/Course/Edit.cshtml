@@ -1,0 +1,31 @@
+﻿@page "{id:int}"
+@model TraineeFrontend.Pages.Course.EditModel
+@{
+    ViewData["Title"] = "Edit Course";
+}
+
+<h2>Edit Course</h2>
+
+<form method="post">
+    <!-- Hidden ID field -->
+    <input type="hidden" asp-for="Course.CourseID" />
+
+    <div class="form-group">
+        <label asp-for="Course.Title"></label>
+        <input asp-for="Course.Title" class="form-control" />
+        <span asp-validation-for="Course.Title" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Course.Credits"></label>
+        <input asp-for="Course.Credits" class="form-control" />
+        <span asp-validation-for="Course.Credits" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <a asp-page="CourseList" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

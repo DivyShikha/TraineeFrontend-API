@@ -1,0 +1,36 @@
+﻿@page
+@model TraineeFrontend.Pages.Course.CourseListModel
+@{
+    ViewData["Title"] = "Course List";
+}
+
+<h1>Courses</h1>
+
+<a asp-page="Create" class="btn btn-success mb-3">Add New Course</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Course ID</th>
+            <th scope="col">Title</th>
+            <th scope="col">Credits</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var course in Model.Courses)
+        {
+            <tr>
+                <td>@course.CourseID</td>
+                <td>@course.Title</td>
+                <td>@course.Credits</td>
+                <td>
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@course.CourseID" style="display:inline;">
+                        <button class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                    <a asp-page="Edit" asp-route-id="@course.CourseID" class="btn btn-warning btn-sm">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

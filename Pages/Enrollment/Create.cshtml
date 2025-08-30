@@ -1,0 +1,40 @@
+﻿@page
+@model TraineeFrontend.Pages.Enrolment.CreateModel
+@{
+    ViewData["Title"] = "Create Enrolment";
+}
+
+<h2>Create Enrolment</h2>
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Enrolment.Description" class="form-label"></label>
+        <input asp-for="Enrolment.Description" class="form-control" />
+        <span asp-validation-for="Enrolment.Description" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Course</label>
+        <select asp-for="Enrolment.CourseID" class="form-control" asp-items="Model.Courses">
+            <option value="">-- Select Course --</option>
+        </select>
+        <span asp-validation-for="Enrolment.CourseID" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Trainee</label>
+        <select asp-for="Enrolment.TraineeID" class="form-control" asp-items="Model.Trainees">
+            <option value="">-- Select Trainee --</option>
+        </select>
+        <span asp-validation-for="Enrolment.TraineeID" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Create Enrolment</button>
+    <a asp-page="EnrolmentList" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
