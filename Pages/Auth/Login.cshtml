@@ -1,0 +1,45 @@
+﻿@page
+@model TraineeFrontend.Pages.Auth.LoginPageModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h2>Login</h2>
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Login.Email" class="form-label"></label>
+        <input asp-for="Login.Email" class="form-control" />
+        <span asp-validation-for="Login.Email" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Login.Password" class="form-label"></label>
+        <input asp-for="Login.Password" type="password" class="form-control" />
+        <span asp-validation-for="Login.Password" class="text-danger"></span>
+    </div>
+
+    @* <!-- Optional 2FA fields -->
+    <div class="mb-3">
+        <label asp-for="Login.TwoFactorCode" class="form-label"></label>
+        <input asp-for="Login.TwoFactorCode" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Login.TwoFactorRecoveryCode" class="form-label"></label>
+        <input asp-for="Login.TwoFactorRecoveryCode" class="form-control" />
+    </div> *@
+
+    <button type="submit" class="btn btn-success">Login</button>
+</form>
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="alert alert-info">@Model.Message</div>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
