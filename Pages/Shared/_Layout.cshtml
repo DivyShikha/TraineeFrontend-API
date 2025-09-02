@@ -10,11 +10,11 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">TraineeFrontend</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
@@ -37,14 +37,28 @@
                         </li>
                     </ul>
 
-                    <!-- Right side (Login / Register buttons) -->
+                    <!-- Right side: auth-aware -->
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item me-2">
-                            <a class="btn btn-outline-primary" asp-area="" asp-page="/Auth/Register">Register</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-outline-success" asp-area="" asp-page="/Auth/Login">Login</a>
-                        </li>
+                        @if (Context.Session.GetString("UserEmail") != null)
+                        {
+                            <li class="nav-item me-3">
+                                <span class="navbar-text">Hello, @Context.Session.GetString("UserEmail")</span>
+                            </li>
+                            <li class="nav-item">
+                                <form method="post" asp-page="/Auth/Logout" class="d-inline">
+                                    <button type="submit" class="btn btn-outline-danger">Logout</button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item me-2">
+                                <a class="btn btn-outline-primary" asp-area="" asp-page="/Auth/Register">Register</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-outline-success" asp-area="" asp-page="/Auth/Login">Login</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

@@ -1,6 +1,5 @@
 ﻿using System.Net.Http;
 using System.Net.Http.Json;
-using System.Text.Json;
 using TraineeFrontend.Model;
 
 namespace TraineeFrontend.Service
@@ -15,31 +14,34 @@ namespace TraineeFrontend.Service
             _httpClient.BaseAddress = new Uri("https://localhost:7240/api/");
         }
 
+        // ✅ Get all trainees
         public async Task<List<Trainee>> GetTrainees()
         {
-            await using Stream stream = await _httpClient.GetStreamAsync("Trainee");
-            var trainees = await JsonSerializer.DeserializeAsync<List<Trainee>>(stream);
-            return trainees;
+            return await _httpClient.GetFromJsonAsync<List<Trainee>>("Trainee");
         }
 
-        public async Task<Trainee> GetTraineeById(int id)
+        // ✅ Get trainee by Id
+        public async Task<Trainee?> GetTraineeById(int id)
         {
             return await _httpClient.GetFromJsonAsync<Trainee>($"Trainee/{id}");
         }
 
-        public async Task<Trainee> AddTrainee(Trainee trainee)
+        // ✅ Add new trainee
+        public async Task<Trainee?> AddTrainee(Trainee trainee)
         {
             var response = await _httpClient.PostAsJsonAsync("Trainee", trainee);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadFromJsonAsync<Trainee>();
         }
 
+        // ✅ Update trainee
         public async Task<bool> UpdateTrainee(int id, Trainee trainee)
         {
             var response = await _httpClient.PutAsJsonAsync($"Trainee/{id}", trainee);
             return response.IsSuccessStatusCode;
         }
 
+        // ✅ Delete trainee
         public async Task<bool> DeleteTrainee(int id)
         {
             var response = await _httpClient.DeleteAsync($"Trainee/{id}");

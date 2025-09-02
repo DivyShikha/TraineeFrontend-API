@@ -19,22 +19,29 @@ namespace TraineeFrontend.Pages.Auth
 
         public string? Message { get; set; }
 
+        public void OnGet()
+        {
+        }
+
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid) return Page();
+            if (!ModelState.IsValid)
+                return Page();
 
             var success = await _authService.LoginAsync(Login);
 
             if (success)
             {
-                // ? Redirect to Home page
+                // ? store email in session for UI purposes
+                HttpContext.Session.SetString("UserEmail", Login.Email);
+
+                // ? redirect to home (Index) after successful login
                 return RedirectToPage("/Index");
             }
 
+            // login failed
             Message = "Invalid login attempt.";
             return Page();
         }
-
-
     }
 }

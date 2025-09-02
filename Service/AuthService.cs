@@ -10,21 +10,20 @@ namespace TraineeFrontend.Service
         public AuthService(HttpClient httpClient)
         {
             _httpClient = httpClient;
-            _httpClient.BaseAddress = new Uri("https://localhost:7240/");
+            _httpClient.BaseAddress = new Uri("https://localhost:7240/"); // backend root
         }
 
+        // ✅ Register → calls /auth/register
         public async Task<bool> RegisterAsync(RegisterModel model)
         {
-            var response = await _httpClient.PostAsJsonAsync("register", model);
+            var response = await _httpClient.PostAsJsonAsync("auth/register", model);
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<bool> LoginAsync(LoginModel model, bool useCookies = true, bool useSessionCookies = false)
+        // ✅ Login → calls /auth/login
+        public async Task<bool> LoginAsync(LoginModel model)
         {
-            // Build query string
-            var url = $"login?useCookies={useCookies.ToString().ToLower()}&useSessionCookies={useSessionCookies.ToString().ToLower()}";
-
-            var response = await _httpClient.PostAsJsonAsync(url, model);
+            var response = await _httpClient.PostAsJsonAsync("auth/login", model);
 
             if (!response.IsSuccessStatusCode)
             {
@@ -32,7 +31,14 @@ namespace TraineeFrontend.Service
                 Console.WriteLine($"Login failed: {response.StatusCode} - {error}");
             }
 
+            // 🍪 Cookie is automatically stored in HttpClient’s CookieContainer
             return response.IsSuccessStatusCode;
+        }
+
+        // ✅ Logout → calls /auth/logout
+        public async Task LogoutAsync()
+        {
+            await _httpClient.PostAsync("auth/logout", null);
         }
     }
 }

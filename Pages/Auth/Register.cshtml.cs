@@ -21,11 +21,19 @@ namespace TraineeFrontend.Pages.Auth
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid) return Page();
+            if (!ModelState.IsValid)
+                return Page();
 
             var success = await _authService.RegisterAsync(Register);
-            Message = success ? "Registration successful!" : "Registration failed!";
 
+            if (success)
+            {
+                // ? redirect to Login page after successful registration
+                return RedirectToPage("/Auth/Login");
+            }
+
+            // if failed, stay on same page and show error message
+            Message = "Registration failed!";
             return Page();
         }
     }

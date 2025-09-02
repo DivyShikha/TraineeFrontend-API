@@ -21,7 +21,7 @@
         <span asp-validation-for="Login.Password" class="text-danger"></span>
     </div>
 
-    @* <!-- Optional 2FA fields -->
+    <!-- Optional 2FA fields -->
     <div class="mb-3">
         <label asp-for="Login.TwoFactorCode" class="form-label"></label>
         <input asp-for="Login.TwoFactorCode" class="form-control" />
@@ -30,7 +30,7 @@
     <div class="mb-3">
         <label asp-for="Login.TwoFactorRecoveryCode" class="form-label"></label>
         <input asp-for="Login.TwoFactorRecoveryCode" class="form-control" />
-    </div> *@
+    </div>
 
     <button type="submit" class="btn btn-success">Login</button>
 </form>

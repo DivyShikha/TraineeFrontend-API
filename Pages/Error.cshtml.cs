@@ -1,28 +1,17 @@
-using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace TraineeFrontend.Pages
 {
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    [IgnoreAntiforgeryToken]
     public class ErrorModel : PageModel
     {
-        public string? RequestId { get; set; }
+        public string Message { get; set; } = "An unexpected error occurred.";
 
-        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
-
-        private readonly ILogger<ErrorModel> _logger;
-
-        public ErrorModel(ILogger<ErrorModel> logger)
+        public void OnGet(string? msg)
         {
-            _logger = logger;
-        }
-
-        public void OnGet()
-        {
-            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
+            if (!string.IsNullOrEmpty(msg))
+            {
+                Message = msg;
+            }
         }
     }
-
 }
